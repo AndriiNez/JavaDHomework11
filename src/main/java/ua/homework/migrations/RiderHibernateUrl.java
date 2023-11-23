@@ -1,4 +1,4 @@
-package ua.homework.Migrations;
+package ua.homework.migrations;
 
 import org.hibernate.cfg.Environment;
 
@@ -9,8 +9,8 @@ public class RiderHibernateUrl {
 
     public String hibernateUrl() throws IOException {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.load(DatabaseMigrationsService.class.getClassLoader().getResourceAsStream("hibernate.properties"));
-
+        hibernateProperties.load(DatabaseMigrationsService.class.getClassLoader()
+                .getResourceAsStream("hibernate.properties"));
         String hibernateUrl = hibernateProperties.getProperty(Environment.URL);
         return hibernateUrl;
     }

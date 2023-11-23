@@ -3,7 +3,7 @@ package ua.homework.hibernate;
 import lombok.Getter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ua.homework.Client.Client;
+import ua.homework.client.Client;
 import ua.homework.planet.Planet;
 import ua.homework.ticket.Ticket;
 

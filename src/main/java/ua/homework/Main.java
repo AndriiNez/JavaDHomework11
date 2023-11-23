@@ -1,31 +1,23 @@
 package ua.homework;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-import ua.homework.Client.Client;
-import ua.homework.Client.ClientCrudService;
-import ua.homework.Migrations.DatabaseMigrationsService;
-import ua.homework.Migrations.RiderHibernateUrl;
-import ua.homework.hibernate.HibernateUntil;
+import ua.homework.client.Client;
+import ua.homework.client.ClientCrudService;
+import ua.homework.migrations.DatabaseMigrationsService;
+import ua.homework.migrations.RiderHibernateUrl;
 import ua.homework.planet.Planet;
-import ua.homework.planet.PlanetCrudService;
 import ua.homework.ticket.Ticket;
 import ua.homework.ticket.TicketCrudService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         RiderHibernateUrl hibernateUrl = new RiderHibernateUrl();
 
         new DatabaseMigrationsService().initDbService(hibernateUrl.hibernateUrl());
-        
 
         TicketCrudService ticketCrudService = new TicketCrudService();
 
@@ -42,9 +34,9 @@ public class Main {
         newTicket.setClient(client);
         newTicket.setFromPlanet(fromPlanet);
         newTicket.setToPlanet(toPlanet);
-        ticketCrudService.createTicket(newTicket);
+        ticketCrudService.create(newTicket);
 
-        Ticket ticketById = ticketCrudService.getTicketById(11l);
+        Ticket ticketById = ticketCrudService.getById(11l);
         System.out.println("Get by id Ticket after create = " + ticketById +
                 ", from Planet = " + ticketById.getFromPlanet() +
                 ", to Planet = " + ticketById.getToPlanet() +
@@ -62,16 +54,16 @@ public class Main {
         updateTicket.setFromPlanet(fromPlanetUpdate);
         updateTicket.setToPlanet(toPlanetUpdate);
         updateTicket.setId(11l);
-        ticketCrudService.updateTicket(updateTicket);
+        ticketCrudService.update(updateTicket);
 
-        Ticket ticketByIdUpdate = ticketCrudService.getTicketById(11l);
+        Ticket ticketByIdUpdate = ticketCrudService.getById(11l);
         System.out.println("Get by id Ticket after updete = " + ticketByIdUpdate +
                 ", from Planet = " + ticketByIdUpdate.getFromPlanet() +
                 ", to Planet = " + ticketByIdUpdate.getToPlanet() +
                 ", Client = " + ticketByIdUpdate.getClient());
 
 
-        ticketCrudService.deleteTicketById(11l);
+        ticketCrudService.deleteById(11l);
 
         List<Ticket> tickets = ticketCrudService.listAllTickets();
         System.out.println("List all Tickets after delete Ticket = " + tickets);

@@ -1,12 +1,11 @@
-package ua.homework.Client;
+package ua.homework.client;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 import ua.homework.ticket.Ticket;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "Client")
@@ -21,8 +20,8 @@ public class Client {
     @Column
     private String name;
     @ToString.Exclude
-    @OneToMany(mappedBy = "client")
-    private List<Ticket> tickets = new ArrayList<>();
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL ,orphanRemoval = true)
+    private Set<Ticket> tickets = new HashSet<>();
 
 
 }

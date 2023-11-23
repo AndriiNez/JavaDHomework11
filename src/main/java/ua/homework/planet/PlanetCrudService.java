@@ -10,7 +10,7 @@ import java.util.List;
 public class PlanetCrudService {
     private CheckIsUpperCaseAndDigit checkIsUpperCaseAndDigit = new CheckIsUpperCaseAndDigit();
 
-    public void createPlanet(Planet planet) {
+    public void create(Planet planet) {
         if (planet.getName() == null) {
             throw new IllegalArgumentException("Name cannot be null!");
         } else if (planet.getName().length() < 1 || planet.getName().length() > 500) {
@@ -36,17 +36,15 @@ public class PlanetCrudService {
         }
     }
 
-    public void setName(String id, String name) {
-        if (name == null) {
+    public void update(Planet planet) {
+        if (planet.getName() == null) {
             throw new IllegalArgumentException("Name cannot be null!");
-        } else if (name.length() < 1 || name.length() > 500) {
+        } else if (planet.getName().length() < 1 || planet.getName().length() > 500) {
             throw new IllegalArgumentException("Name cannot be less than 1 characters or more than 500 characters");
         }
         try (Session session = HibernateUntil.getInstance().getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            Planet existing = session.get(Planet.class, id);
-            existing.setName(name);
-            session.update(existing);
+            session.update(planet);
             transaction.commit();
         }
     }

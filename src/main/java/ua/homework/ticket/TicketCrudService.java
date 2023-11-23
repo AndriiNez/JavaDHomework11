@@ -10,7 +10,7 @@ import java.util.List;
 public class TicketCrudService {
     private CheckIsUpperCaseAndDigit checkIsUpperCaseAndDigit = new CheckIsUpperCaseAndDigit();
 
-    public void createTicket(Ticket ticket) {
+    public void create(Ticket ticket) {
         if (ticket.getClient() == null || ticket.getClient().getId() == 0) {
             throw new IllegalArgumentException("Cannot save ticket for a non-existing or null client");
         }
@@ -28,13 +28,13 @@ public class TicketCrudService {
         }
     }
 
-    public Ticket getTicketById(Long id) {
+    public Ticket getById(Long id) {
         try (Session session = HibernateUntil.getInstance().getSessionFactory().openSession()) {
             return session.get(Ticket.class, id);
         }
     }
 
-    public void updateTicket(Ticket ticket) {
+    public void update(Ticket ticket) {
         try (Session session = HibernateUntil.getInstance().getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.update(ticket);
@@ -42,7 +42,7 @@ public class TicketCrudService {
         }
     }
 
-    public void deleteTicketById(Long id) {
+    public void deleteById(Long id) {
         try (Session session = HibernateUntil.getInstance().getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             Ticket ticket = session.get(Ticket.class, id);
