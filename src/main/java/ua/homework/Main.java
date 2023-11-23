@@ -65,7 +65,7 @@ public class Main {
 
         ticketCrudService.deleteById(11l);
 
-        List<Ticket> tickets = ticketCrudService.listAllTickets();
+        List<Ticket> tickets = ticketCrudService.listAll();
         System.out.println("List all Tickets after delete Ticket = " + tickets);
     }
 }

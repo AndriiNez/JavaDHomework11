@@ -53,7 +53,7 @@ public class ClientCrudService {
     }
 
 
-    public List<Client> listAllClients() {
+    public List<Client> listAll() {
         try (Session session = HibernateUntil.getInstance().getSessionFactory().openSession()) {
             return session.createQuery("from Client", Client.class).list();
         }

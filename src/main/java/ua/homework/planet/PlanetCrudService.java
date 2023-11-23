@@ -61,7 +61,7 @@ public class PlanetCrudService {
     }
 
 
-    public List<Planet> listAllPlanets() {
+    public List<Planet> listAll() {
         try (Session session = HibernateUntil.getInstance().getSessionFactory().openSession()) {
             return session.createQuery("from Planet", Planet.class).list();
         }

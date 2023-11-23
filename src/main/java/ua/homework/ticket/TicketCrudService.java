@@ -54,7 +54,7 @@ public class TicketCrudService {
     }
 
 
-    public List<Ticket> listAllTickets() {
+    public List<Ticket> listAll() {
         try (Session session = HibernateUntil.getInstance().getSessionFactory().openSession()) {
             return session.createQuery("from Ticket", Ticket.class).list();
         }
